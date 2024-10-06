@@ -39,7 +39,7 @@ TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "4"))
 #start message
 START_MSG = os.environ.get("START_MESSAGE", "Hello {first}\n\nI can store private files in Specified Channel and other users can access it from special link.")
 try:
-    ADMINS=[]
+    ADMINS=[778976952]
     for x in (os.environ.get("ADMINS", "778976952 7056014024").split()):
         ADMINS.append(int(x))
 except ValueError:
