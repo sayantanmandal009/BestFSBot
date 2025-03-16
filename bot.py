@@ -8,11 +8,7 @@ from pyrogram import Client
 from pyrogram.enums import ParseMode
 import sys
 from datetime import datetime
-import threading, time, logging #for uptime
-import asyncio #for uptime
-from config import API_HASH, APP_ID, LOGGER, TG_BOT_TOKEN, TG_BOT_WORKERS, FORCE_SUB_CHANNEL, CHANNEL_ID, PORT
-
-logging.basicConfig(level=logging.INFO) #for uptime
+from config import API_HASH, APP_ID, LOGGER, TG_BOT_TOKEN, TG_BOT_WORKERS, FORCE_SUB_CHANNEL, CHANNEL_ID, PORTp
 
 class Bot(Client):
     def __init__(self):
@@ -78,23 +74,3 @@ class Bot(Client):
         await super().stop()
         self.LOGGER(__name__).info("Bot stopped.")
         
-# Keep bot alive (Koyeb)
-def keep_awake():
-    while True:
-        logging.info("Bot is running...")
-        time.sleep(300)
-
-# Start keep-alive thread
-threading.Thread(target=keep_awake, daemon=True).start()
-
-# Start the bot
-async def main():
-    bot = Bot()
-    await bot.start()
-    await asyncio.Event().wait()  # Keep running indefinitely
-
-if __name__ == "__main__":
-    try:
-        asyncio.get_event_loop().run_until_complete(main())  # ✅ Safe alternative
-    except KeyboardInterrupt:
-        logging.info("Bot stopped manually.")
